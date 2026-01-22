@@ -27,40 +27,73 @@
             </div>
         </div>
 <section id="content-implementacao" class="content-section active">
-    <div id="impl-cards-view">
-        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Escolha o seu modelo de jornada</h3>
-        <div style="display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap;">
 
+    <div id="view-segmentos">
+        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Qual é o seu segmento?</h3>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto;">
+
+            <div class="migration-card" style="height: auto; padding: 30px 20px;">
+                <i class="far fa-calendar-alt card-icon" style="color: #5d50c6;"></i>
+                <h4 style="margin: 15px 0;">Agenda Fixa</h4>
+                <button class="btn-saiba-mais" onclick="selectSegment('agenda_fixa')">SAIBA MAIS</button>
+            </div>
+
+            <div class="migration-card" style="height: auto; padding: 30px 20px;">
+                <i class="fas fa-dumbbell card-icon" style="color: #5d50c6;"></i>
+                <h4 style="margin: 15px 0;">Gym</h4>
+                <button class="btn-saiba-mais" onclick="selectSegment('gym')">SAIBA MAIS</button>
+            </div>
+
+            <div class="migration-card" style="height: auto; padding: 30px 20px;">
+                <i class="fas fa-box-open card-icon" style="color: #5d50c6;"></i>
+                <h4 style="margin: 15px 0;">Box</h4>
+                <button class="btn-saiba-mais" onclick="selectSegment('box')">SAIBA MAIS</button>
+            </div>
+
+            <div class="migration-card" style="height: auto; padding: 30px 20px;">
+                <i class="fas fa-rocket card-icon" style="color: #5d50c6;"></i>
+                <h4 style="margin: 15px 0;">Starter</h4>
+                <button class="btn-saiba-mais" onclick="selectSegment('starter')">SAIBA MAIS</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="view-consultorias" style="display: none;">
+        <button class="btn-saiba-mais" onclick="backToSegments()" style="margin-bottom: 20px;">&larr; Voltar para Segmentos</button>
+
+        <h3 class="col-title" style="text-align: center; margin-top: 10px;">Escolha o modelo de jornada</h3>
+
+        <div style="display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap;">
             <div class="migration-card" style="width: 300px; height: auto; padding: 40px 20px;">
                 <i class="fas fa-user-tie card-icon" style="color: #5d50c6;"></i>
                 <h4 style="margin: 15px 0;">Consultoria Personalizada</h4>
-                <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Acompanhamento dedicado para sua academia.</p>
+                <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Acompanhamento dedicado.</p>
                 <button class="btn-saiba-mais" onclick="openImplTimeline('personalizada')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="width: 300px; height: auto; padding: 40px 20px;">
-                <i class="fas fa-brain card-icon" style="color: #fceea2; -webkit-text-stroke: 1px #333;"></i> <h4 style="margin: 15px 0;">Consultoria Inteligente</h4>
-                <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Jornada otimizada com inteligência de dados.</p>
+                <i class="fas fa-brain card-icon" style="color: #fceea2; -webkit-text-stroke: 1px #333;"></i>
+                <h4 style="margin: 15px 0;">Consultoria Inteligente</h4>
+                <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Jornada otimizada com dados.</p>
                 <button class="btn-saiba-mais" onclick="openImplTimeline('inteligente')">SAIBA MAIS</button>
             </div>
         </div>
     </div>
 
     <div id="impl-timeline-view" style="display: none;">
-        <button class="btn-saiba-mais" onclick="closeImplTimeline()" style="margin-bottom: 30px;">&larr; Voltar</button>
+        <button class="btn-saiba-mais" onclick="backToConsultorias()" style="margin-bottom: 30px;">&larr; Voltar</button>
 
         <h2 id="impl-title-display" style="text-align: center; margin-bottom: 40px;"></h2>
 
         <div class="timeline-impl" id="timeline-container-personalizada" style="display: none;">
             @foreach($impPersonalizada as $item)
-            <div class="impl-item">
+            <div class="impl-item item-timeline-row" data-segments="{{ json_encode($item->segmentos ?? []) }}">
                 <div class="impl-icon-box"><i class="{{ $item->icone }}"></i></div>
-
                 <div class="impl-content">
                     <span class="tag-prazo">{{ $item->prazo }}</span>
-
                     <h4>{{ $item->titulo }}</h4>
-
                     <p>{{ $item->descricao }}</p>
                 </div>
             </div>
@@ -69,9 +102,8 @@
 
         <div class="timeline-impl" id="timeline-container-inteligente" style="display: none;">
             @foreach($impInteligente as $item)
-            <div class="impl-item">
+            <div class="impl-item item-timeline-row" data-segments="{{ json_encode($item->segmentos ?? []) }}">
                 <div class="impl-icon-box"><i class="{{ $item->icone }}"></i></div>
-
                 <div class="impl-content">
                     <span class="tag-prazo">{{ $item->prazo }}</span>
                     <h4>{{ $item->titulo }}</h4>
@@ -340,27 +372,88 @@
     document.addEventListener("DOMContentLoaded", function() {
         filtrarEquip(null, 'catracas');
     });
-    function openImplTimeline(tipo) {
-    document.getElementById('impl-cards-view').style.display = 'none';
+   let currentSegment = null;
+
+// 1. Usuário clica no Segmento
+function selectSegment(segment) {
+    currentSegment = segment; // Salva 'gym', 'box', etc.
+
+    // Esconde segmentos, mostra consultorias
+    document.getElementById('view-segmentos').style.display = 'none';
+    document.getElementById('view-consultorias').style.display = 'block';
+
+    // Animação simples de fade
+    document.getElementById('view-consultorias').style.opacity = 0;
+    setTimeout(() => document.getElementById('view-consultorias').style.opacity = 1, 50);
+}
+
+// 2. Voltar de Consultorias para Segmentos
+function backToSegments() {
+    currentSegment = null;
+    document.getElementById('view-consultorias').style.display = 'none';
+    document.getElementById('view-segmentos').style.display = 'block';
+}
+
+// 3. Usuário clica na Consultoria (Abre a Timeline Filtrada)
+function openImplTimeline(tipo) {
+    document.getElementById('view-consultorias').style.display = 'none';
     document.getElementById('impl-timeline-view').style.display = 'block';
 
-    // Esconde todas as timelines
+    // Esconde ambas as listas de timeline
     document.getElementById('timeline-container-personalizada').style.display = 'none';
     document.getElementById('timeline-container-inteligente').style.display = 'none';
 
-    // Mostra a correta e ajusta título
-    if(tipo === 'personalizada') {
-        document.getElementById('impl-title-display').innerText = 'Jornada: Consultoria Personalizada';
-        document.getElementById('timeline-container-personalizada').style.display = 'block';
-    } else {
-        document.getElementById('impl-title-display').innerText = 'Jornada: Consultoria Inteligente';
-        document.getElementById('timeline-container-inteligente').style.display = 'block';
-    }
+    // Define qual container vamos usar
+    let containerId = (tipo === 'personalizada')
+        ? 'timeline-container-personalizada'
+        : 'timeline-container-inteligente';
+
+    let container = document.getElementById(containerId);
+    container.style.display = 'block';
+
+    // ATUALIZA TÍTULO
+    let titulo = (tipo === 'personalizada') ? 'Consultoria Personalizada' : 'Consultoria Inteligente';
+    // Adiciona o nome do segmento ao título para contexto
+    let nomeSegmento = currentSegment.charAt(0).toUpperCase() + currentSegment.slice(1).replace('_', ' ');
+    document.getElementById('impl-title-display').innerText = `Jornada: ${titulo} (${nomeSegmento})`;
+
+    // FILTRAGEM DOS ITENS
+    // Pega todos os itens dentro do container selecionado
+    let items = container.querySelectorAll('.item-timeline-row');
+
+    items.forEach(item => {
+        // Pega o array de segmentos salvo no atributo data-segments
+        let itemSegments = JSON.parse(item.getAttribute('data-segments'));
+
+        // Se o array for nulo ou vazio, ou se incluir o segmento atual, mostra.
+        // Se não incluir, esconde.
+        if (!itemSegments || itemSegments.length === 0 || itemSegments.includes(currentSegment)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }
 
-function closeImplTimeline() {
+// 4. Voltar da Timeline para Consultorias
+function backToConsultorias() {
     document.getElementById('impl-timeline-view').style.display = 'none';
-    document.getElementById('impl-cards-view').style.display = 'block';
+    document.getElementById('view-consultorias').style.display = 'block';
+}
+
+// Resetar o SwitchTab principal para garantir que ao trocar de aba tudo resete
+const originalSwitchTab = window.switchTab; // Guarda a função original se existir
+window.switchTab = function(tabName) {
+    // Chama a lógica original de troca de abas
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById('btn-' + tabName).classList.add('active');
+    document.getElementById('content-' + tabName).classList.add('active');
+
+    // Se saiu da aba de implementação, reseta ela para o início
+    if(tabName !== 'implementacao') {
+        backToSegments(); // Reseta para a tela inicial
+    }
 }
     </script>
 </body>

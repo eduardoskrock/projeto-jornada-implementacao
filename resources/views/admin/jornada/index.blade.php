@@ -86,35 +86,67 @@
                 </div>
             </div>
 
-            <div id="modalEditarImpl-{{ $item->id }}" class="custom-modal-overlay">
-                <div class="custom-modal-box">
-                    <div class="modal-header">
-                        <h3>Editar Passo</h3>
-                        <span onclick="fecharModal('modalEditarImpl-{{ $item->id }}')" class="close-btn">&times;</span>
+       <div id="modalEditarImpl-{{ $item->id }}" class="custom-modal-overlay">
+    <div class="custom-modal-box">
+        <div class="modal-header">
+            <h3>Editar Passo</h3>
+            <span onclick="fecharModal('modalEditarImpl-{{ $item->id }}')" class="close-btn">&times;</span>
+        </div>
+        <form action="{{ route('admin.implementacao.update', $item->id) }}" method="POST">
+            @csrf @method('PUT')
+            <div class="modal-body">
+
+                <div class="input-group">
+                    <label>Segmentos</label>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+
+                        <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="segmentos[]" value="agenda_fixa"
+                            {{-- A LÓGICA: Se 'agenda_fixa' estiver na lista salva, marca com 'checked' --}}
+                            {{ is_array($item->segmentos) && in_array('agenda_fixa', $item->segmentos) ? 'checked' : '' }}>
+                            Agenda Fixa
+                        </label>
+
+                        <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="segmentos[]" value="gym"
+                            {{ is_array($item->segmentos) && in_array('gym', $item->segmentos) ? 'checked' : '' }}>
+                            Gym
+                        </label>
+
+                        <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="segmentos[]" value="box"
+                            {{ is_array($item->segmentos) && in_array('box', $item->segmentos) ? 'checked' : '' }}>
+                            Box
+                        </label>
+
+                        <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                            <input type="checkbox" name="segmentos[]" value="starter"
+                            {{ is_array($item->segmentos) && in_array('starter', $item->segmentos) ? 'checked' : '' }}>
+                            Starter
+                        </label>
                     </div>
-                    <form action="{{ route('admin.implementacao.update', $item->id) }}" method="POST">
-                        @csrf @method('PUT')
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <label>Tipo</label>
-                                <select name="tipo">
-                                    <option value="personalizada" {{ $item->tipo == 'personalizada' ? 'selected' : '' }}>Personalizada</option>
-                                    <option value="inteligente" {{ $item->tipo == 'inteligente' ? 'selected' : '' }}>Inteligente</option>
-                                </select>
-                            </div>
-                            <div class="input-group"><label>Ordem</label><input type="number" name="ordem" value="{{ $item->ordem }}"></div>
-                            <div class="input-group"><label>Prazo</label><input type="text" name="prazo" value="{{ $item->prazo }}"></div>
-                            <div class="input-group"><label>Título</label><input type="text" name="titulo" value="{{ $item->titulo }}"></div>
-                            <div class="input-group"><label>Descrição</label><textarea name="descricao" rows="3">{{ $item->descricao }}</textarea></div>
-                            <div class="input-group"><label>Ícone (FontAwesome)</label><input type="text" name="icone" value="{{ $item->icone }}"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-cancelar-modal" onclick="fecharModal('modalEditarImpl-{{ $item->id }}')">Cancelar</button>
-                            <button type="submit" class="btn-salvar-modal">Salvar</button>
-                        </div>
-                    </form>
                 </div>
+
+                <div class="input-group">
+                    <label>Tipo</label>
+                    <select name="tipo">
+                        <option value="personalizada" {{ $item->tipo == 'personalizada' ? 'selected' : '' }}>Personalizada</option>
+                        <option value="inteligente" {{ $item->tipo == 'inteligente' ? 'selected' : '' }}>Inteligente</option>
+                    </select>
+                </div>
+                <div class="input-group"><label>Ordem</label><input type="number" name="ordem" value="{{ $item->ordem }}"></div>
+                <div class="input-group"><label>Prazo</label><input type="text" name="prazo" value="{{ $item->prazo }}"></div>
+                <div class="input-group"><label>Título</label><input type="text" name="titulo" value="{{ $item->titulo }}"></div>
+                <div class="input-group"><label>Descrição</label><textarea name="descricao" rows="3">{{ $item->descricao }}</textarea></div>
+                <div class="input-group"><label>Ícone</label><input type="text" name="icone" value="{{ $item->icone }}"></div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar-modal" onclick="fecharModal('modalEditarImpl-{{ $item->id }}')">Cancelar</button>
+                <button type="submit" class="btn-salvar-modal">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
             @endforeach
         @else
             <p style="padding: 20px; text-align: center; color: #999; font-style: italic;">Nenhum passo cadastrado nesta jornada.</p>
@@ -551,6 +583,23 @@
                     <input type="text" name="icone" value="fas fa-check" placeholder="Ex: fas fa-rocket">
                     <small style="color: #999;">Exemplos: fas fa-video, fas fa-file-alt, fas fa-check</small>
                 </div>
+                <div class="input-group">
+                <label>Segmentos (Selecione um ou mais)</label>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox" name="segmentos[]" value="agenda_fixa"> Agenda Fixa
+                    </label>
+                    <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox" name="segmentos[]" value="gym"> Gym
+                    </label>
+                    <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox" name="segmentos[]" value="box"> Box
+                    </label>
+                    <label style="font-weight: normal; display: flex; align-items: center; gap: 5px;">
+                        <input type="checkbox" name="segmentos[]" value="starter"> Starter
+                    </label>
+                </div>
+            </div>
             </div>
 
             <div class="modal-footer">

@@ -10,6 +10,11 @@ class PassoImplementacao extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tipo', 'ordem', 'prazo', 'titulo', 'descricao', 'icone'
+        'tipo', 'segmentos', 'ordem', 'prazo', 'titulo', 'descricao', 'icone'
+    ];
+
+    // O CAST É O SEGREDO PARA SALVAR COMO ARRAY
+    protected $casts = [
+        'segmentos' => 'array',
     ];
 }
