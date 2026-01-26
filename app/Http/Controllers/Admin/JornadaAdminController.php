@@ -140,6 +140,26 @@ class JornadaAdminController extends Controller
         return back()->with('success', 'Passo de implementação criado!');
     }
 
+    public function updatePasso(Request $request, $id)
+    {
+        // Busca o passo no banco de dados pelo ID
+        $passo = \App\Models\PassoAplicativo::findOrFail($id);
+
+        // Atualiza todos os campos enviados pelo formulário
+        $passo->update($request->all());
+
+        // Retorna para a página anterior com mensagem de sucesso
+        return back()->with('success', 'Passo atualizado com sucesso!');
+    }
+
+    public function destroyPasso($id)
+    {
+        $passo = \App\Models\PassoAplicativo::findOrFail($id);
+        $passo->delete();
+
+        return back()->with('success', 'Passo removido com sucesso!');
+    }
+
     public function updateImplementacao(Request $request, $id)
     {
         PassoImplementacao::findOrFail($id)->update($request->all());

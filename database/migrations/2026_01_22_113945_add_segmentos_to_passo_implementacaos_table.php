@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::table('passo_implementacaos', function (Blueprint $table) {
-            //
+            // Armazenará um array, ex: ["gym", "box"]
+            $table->json('segmentos')->nullable()->after('tipo');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::table('passo_implementacaos', function (Blueprint $table) {
-            //
+            $table->dropColumn('segmentos');
         });
     }
 };

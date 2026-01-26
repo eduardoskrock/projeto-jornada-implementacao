@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-       Schema::table('migracao_itens', function (Blueprint $table) {
-        $table->string('arquivo')->nullable(); // Campo para o caminho do arquivo
-     });
+        // CORREÇÃO: O nome correto da tabela é 'item_migracaos'
+        Schema::table('item_migracaos', function (Blueprint $table) {
+            $table->string('arquivo')->nullable();
+        });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::table('migracao_itens', function (Blueprint $table) {
-            //
+        Schema::table('item_migracaos', function (Blueprint $table) {
+            $table->dropColumn('arquivo');
         });
     }
 };

@@ -6,23 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up() {
-    Schema::table('migracaos', function (Blueprint $table) {
-        // 'com_sistema' ou 'sem_sistema'
-        $table->string('secao')->default('com_sistema'); 
-    });
-}
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function up()
     {
         Schema::table('migracaos', function (Blueprint $table) {
-            //
+            // Removida a linha 'secao' para evitar erro de duplicação
+            // Se houver outras colunas para adicionar, coloque aqui.
+            // Se não, pode deixar vazio. O importante é não quebrar o banco.
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('migracaos', function (Blueprint $table) {
+            // $table->dropColumn('secao'); // Comentado para não dar erro ao voltar
         });
     }
 };

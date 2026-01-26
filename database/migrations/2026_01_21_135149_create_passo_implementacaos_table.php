@@ -6,27 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
-{
-    Schema::create('passo_implementacaos', function (Blueprint $table) {
-        $table->id();
-        $table->string('tipo'); // 'personalizada' ou 'inteligente'
-        $table->integer('ordem')->default(1);
-        $table->string('prazo')->nullable(); // Ex: 'Dia 1', 'Semana 2'
-        $table->string('titulo');
-        $table->text('descricao')->nullable();
-        $table->string('icone')->default('fas fa-check'); // FontAwesome
-        $table->timestamps();
-    });
-}
+    {
+        Schema::create('passo_implementacaos', function (Blueprint $table) {
+            $table->id();
+            $table->string('tipo'); // personalizada ou inteligente
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+            // AQUI ESTÁ A COLUNA QUE FALTAVA:
+            $table->json('segmentos')->nullable();
+
+            $table->integer('ordem')->default(1);
+            $table->string('prazo')->nullable();
+            $table->string('titulo');
+            $table->text('descricao')->nullable();
+            $table->string('icone')->default('fas fa-check');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
     {
         Schema::dropIfExists('passo_implementacaos');
     }

@@ -18,7 +18,7 @@
 
     <div class="master-container">
         <div class="tabs-container">
-            <p class="tab-instruction">Clique na opção desejada e entenda a jornada técnica</p>
+            <p class="tab-instruction">Entenda a jornada de implementação de acordo com a etapa</p>
             <div class="tabs-wrapper">
                 <button class="tab-btn active" onclick="switchTab('implementacao')" id="btn-implementacao">Implementação</button>
                 <button class="tab-btn" onclick="switchTab('migracao')" id="btn-migracao">Migração de dados</button>
@@ -29,30 +29,30 @@
 <section id="content-implementacao" class="content-section active">
 
     <div id="view-segmentos">
-        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Qual é o seu segmento?</h3>
+        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Selecione seu segmento</h3>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto;">
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="far fa-calendar-alt card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-calendar-days card-icon" style="color: #5d50c6;"></i>
                 <h4 style="margin: 15px 0;">Agenda Fixa</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('agenda_fixa')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fas fa-dumbbell card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-dumbbell card-icon" style="color: #5d50c6;"></i>
                 <h4 style="margin: 15px 0;">Gym</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('gym')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fas fa-box-open card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-medal card-icon" style="color: #5d50c6;"></i>
                 <h4 style="margin: 15px 0;">Box</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('box')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fas fa-rocket card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-user-tag card-icon" style="color: #5d50c6;"></i>
                 <h4 style="margin: 15px 0;">Starter</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('starter')">SAIBA MAIS</button>
             </div>
@@ -115,39 +115,39 @@
     </div>
 
 </section>
-        <section id="content-migracao" class="content-section">
-            <div id="migration-list-view">
-                <h3 style="text-align:center; margin: 40px 0 30px;">Para clientes que possuem outro sistema em operação</h3>
-                <div class="migration-grid">
-                    @foreach($comSistema as $m)
-                    <div class="migration-card">
-                        <i class="fas fa-cloud-upload-alt card-icon"></i>
-                        <p style="font-weight:700; margin-bottom:15px; font-size: 14px;">{{ $m->nome }}</p>
-                        <button class="btn-saiba-mais" onclick="openMigrationDetail({{ $m->id }})">SAIBA MAIS</button>
-                    </div>
-                    @endforeach
-                </div>
 
-                <h3 style="text-align:center; margin: 60px 0 30px;">Para clientes que não possuem sistema</h3>
-                <div class="migration-grid">
-                    @foreach($semSistema as $m)
-                    <div class="migration-card">
-                        <i class="fas fa-file-import card-icon"></i>
-                        <p style="font-weight:700; margin-bottom:15px; font-size:14px;">{{ $m->nome }}</p>
-                        <button class="btn-saiba-mais" onclick="openMigrationDetail({{ $m->id }})">SAIBA MAIS</button>
-                    </div>
-                    @endforeach
-                </div>
+<section id="content-migracao" class="content-section">
+    <div id="migration-list-view">
+        <h3 style="text-align:center; margin: 40px 0 30px;">Para clientes que possuem outro sistema em operação</h3>
+        <div class="migration-grid">
+            @foreach($comSistema as $m)
+            <div class="migration-card">
+                <i class="fa-solid fa-database card-icon"></i>
+                <p style="font-weight:700; margin-bottom:15px; font-size: 14px;">{{ $m->nome }}</p>
+                <button class="btn-saiba-mais" onclick="openMigrationDetail({{ $m->id }})">SAIBA MAIS</button>
             </div>
+            @endforeach
+        </div>
 
-            <div id="migration-details-view" style="display:none;">
-                <button class="btn-saiba-mais" onclick="closeMigrationDetail()" style="margin-bottom:20px;">&larr; Voltar</button>
-                <div id="dynamic-content"></div>
+        <h3 style="text-align:center; margin: 60px 0 30px;">Para clientes que não possuem sistema</h3>
+        <div class="migration-grid">
+            @foreach($semSistema as $m)
+            <div class="migration-card">
+                <i class="fa-solid fa-table card-icon"></i>
+                <p style="font-weight:700; margin-bottom:15px; font-size:14px;">{{ $m->nome }}</p>
+                <button class="btn-saiba-mais" onclick="openMigrationDetail({{ $m->id }})">SAIBA MAIS</button>
             </div>
-        </section>
+            @endforeach
+        </div>
+    </div>
 
-        <section id="content-catraca" class="content-section">
+    <div id="migration-details-view" style="display:none;">
+        <button class="btn-saiba-mais" onclick="closeMigrationDetail()" style="margin-bottom:20px;">&larr; Voltar</button>
+        <div id="dynamic-content"></div>
+    </div>
+</section>
 
+<section id="content-catraca" class="content-section">
     <div style="background-color: #fcfeb3; padding: 30px; border-radius: 15px; margin-bottom: 40px;">
         <div style="margin-bottom: 20px;">
             <h3 style="color: #333; text-align: center;">Requisitos obrigatórios para integração de controle de acesso</h3>
@@ -209,47 +209,40 @@
         </table>
     </div>
 </section>
+<section id="content-whitelabel" class="content-section">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h2 class="section-title">Passo a passo - Aplicativo White Label</h2>
+    </div>
 
-    <section id="content-whitelabel" class="content-section">
-    <h2 class="section-title">Passo a passo - Aplicativo White Label</h2><br>
     <div class="timeline-steps">
-    @foreach($passosApp as $passo)
+        @foreach($passosApp as $passo)
 
-    <div class="step-item">
-        <div class="step-number {{ $passo->responsabilidade == 'cliente' ? 'ball-client' : 'ball-tecnofit' }}">
-            {{ $passo->numero }}
+        <div class="step-item">
+
+            <div class="step-number {{ $passo->responsabilidade == 'cliente' ? 'ball-client' : 'ball-tecnofit' }}">
+                {{ $passo->numero }}
+            </div>
+
+            <div style="flex: 1;">
+                <div class="step-info">
+                    <h4>{{ $passo->titulo }}</h4>
+                    <p style="color: #666; margin-bottom: 15px;">{{ $passo->descricao }}</p>
+
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span style="font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; color: #333; background-color: {{ $passo->responsabilidade == 'tecnofit' ? '#fceea2' : '#e9ecef' }};">
+                            <i class="fas fa-user-tag"></i> {{ ucfirst($passo->responsabilidade) }}
+                        </span>
+
+                        @if($passo->prazo)
+                        <span style="font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; color: #4338ca; background-color: #e0e7ff;">
+                            <i class="far fa-clock"></i> {{ $passo->prazo }}
+                        </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <div class="step-info" style="flex: 1;">
-    <h4 style="margin: 0 0 5px 0; font-size: 16px; font-weight: 700;">{{ $passo->titulo }}</h4>
-    <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.4;">{{ $passo->descricao }}</p>
-
-    <div style="margin-top: 12px;">
-        <span style="
-            font-size: 10px;
-            font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            color: #333;
-            background-color: {{ $passo->responsabilidade == 'tecnofit' ? '#fceea2' : '#e9ecef' }};
-        ">
-            <i class="fas fa-user-tag" style="margin-right: 4px;"></i>
-            Responsável: {{ ucfirst($passo->responsabilidade) }}
-        </span>
-        @if($passo->prazo)
-        <div style="margin-top: 5px; font-size: 12px; color: #666;">
-            <i class="far fa-clock"></i>
-            <strong>Prazo:</strong> {{ $passo->prazo }}
-        </div>
-        @endif
-    </div>
-    </div>
-        </div>
-    </div>
-
-    @endforeach
+        @endforeach
     </div>
 </section>
     </div>
@@ -455,6 +448,37 @@ window.switchTab = function(tabName) {
         backToSegments(); // Reseta para a tela inicial
     }
 }
+// Aguarda o carregamento completo do HTML antes de rodar o script
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const steps = document.querySelectorAll('.step-item');
+
+        // Função principal que verifica a rolagem
+        function checkScroll() {
+            // Define o ponto de gatilho (85% da altura da tela)
+            const triggerBottom = window.innerHeight * 0.85;
+
+            steps.forEach(step => {
+                // Pega a posição do topo do item em relação à tela
+                const stepTop = step.getBoundingClientRect().top;
+
+                // Se o item já apareceu na tela (passou do ponto de gatilho)
+                if (stepTop < triggerBottom) {
+                    step.classList.add('active');
+                } else {
+                    // Opcional: remove a classe se rolar para cima de novo
+                    step.classList.remove('active');
+                }
+            });
+        }
+
+        // Adiciona o "ouvinte" no scroll do mouse
+        window.addEventListener('scroll', checkScroll);
+
+        // Roda a função uma vez imediatamente para ativar os itens que já estão visíveis no topo
+        checkScroll();
+    });
+
     </script>
 </body>
 </html>
