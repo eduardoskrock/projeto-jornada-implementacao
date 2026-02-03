@@ -3,6 +3,9 @@
 use App\Http\Controllers\JornadaController;
 use App\Http\Controllers\Admin\JornadaAdminController;
 
+Route::get('/', function () {
+    return redirect('/jornada');
+});
 // Site do Cliente
 Route::get('/jornada', [JornadaController::class, 'index'])->name('jornada.index');
 
