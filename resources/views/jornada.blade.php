@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jornada Técnica Tecnofit</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
 </head>
@@ -12,8 +13,8 @@
     <x-header />
 
     <div class="hero-section">
-        <h1 class="hero-title">Jornada de implementação <span>Tecnofit</span></h1>
-        <p class="hero-subtitle">Confira as etapas e requisitos para fazer a virada de chave de sistema com segurança e clareza!</p>
+        <h1 class="hero-title">Jornada de implementação Tecnofit</h1>
+        <p class="hero-subtitle">Confira as etapas durante a implementação do sistema no seu negócio!</p>
     </div>
 
     <div class="master-container">
@@ -23,42 +24,58 @@
                 <button class="tab-btn active" onclick="switchTab('implementacao')" id="btn-implementacao">Implementação</button>
                 <button class="tab-btn" onclick="switchTab('migracao')" id="btn-migracao">Migração de dados</button>
                 <button class="tab-btn" onclick="switchTab('catraca')" id="btn-catraca">Controle de acesso</button>
-                <button class="tab-btn" onclick="switchTab('whitelabel')" id="btn-whitelabel">Aplicativo personalizado</button>
+                <button class="tab-btn" onclick="switchTab('whitelabel')" id="btn-whitelabel">Aplicativo personalizado (opcional)</button>
             </div>
         </div>
 <section id="content-implementacao" class="content-section active">
 
     <div id="view-segmentos">
-        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Selecione o segmento</h3>
+    <h3 class="col-title" style="text-align: center; margin-top: 20px;">Selecione o segmento</h3>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto;">
+    <div class="starter-grid-container">
 
-            <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-calendar-days card-icon" style="color: var(--tecno-black)"></i>
-                <h4 style="margin: 15px 0;">Agenda Fixa</h4>
-                <button class="btn-saiba-mais" onclick="selectSegment('agenda_fixa')">SAIBA MAIS</button>
+        <div class="starter-card-item">
+            <div class="starter-icon-badge">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <div class="starter-card-body">
+                <h4>Agenda Fixa</h4>
+                <button class="btn-starter-action" onclick="selectSegment('agenda_fixa')">SAIBA MAIS</button>
+            </div>
             </div>
 
-            <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-dumbbell card-icon" style="color: var(--tecno-black);"></i>
-                <h4 style="margin: 15px 0;">Gym</h4>
-                <button class="btn-saiba-mais" onclick="selectSegment('gym')">SAIBA MAIS</button>
+        <div class="starter-card-item">
+            <div class="starter-icon-badge">
+                <i class="fa-solid fa-dumbbell"></i>
             </div>
-
-            <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-medal card-icon" style="color: var(--tecno-black);"></i>
-                <h4 style="margin: 15px 0;">Box</h4>
-                <button class="btn-saiba-mais" onclick="selectSegment('box')">SAIBA MAIS</button>
+            <div class="starter-card-body">
+                <h4>Gym</h4>
+                <button class="btn-starter-action" onclick="selectSegment('gym')">SAIBA MAIS</button>
             </div>
-
-            <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-user-tag card-icon" style="color: var(--tecno-black);"></i>
-                <h4 style="margin: 15px 0;">Starter</h4>
-                <button class="btn-saiba-mais" onclick="selectSegment('starter')">SAIBA MAIS</button>
-            </div>
-
         </div>
+
+        <div class="starter-card-item">
+            <div class="starter-icon-badge">
+                <i class="fa-solid fa-medal"></i>
+            </div>
+            <div class="starter-card-body">
+                <h4>Box</h4>
+                <button class="btn-starter-action" onclick="selectSegment('box')">SAIBA MAIS</button>
+            </div>
+        </div>
+
+        <div class="starter-card-item">
+            <div class="starter-icon-badge">
+                <i class="fa-solid fa-user-tag"></i>
+            </div>
+            <div class="starter-card-body">
+                <h4>Starter</h4>
+                <button class="btn-starter-action" onclick="selectSegment('starter')">SAIBA MAIS</button>
+            </div>
+        </div>
+
     </div>
+</div>
 
     <div id="view-consultorias" style="display: none;">
         <button class="btn-saiba-mais" onclick="backToSegments()" style="margin-bottom: 20px;">&larr; Voltar para Segmentos</button>

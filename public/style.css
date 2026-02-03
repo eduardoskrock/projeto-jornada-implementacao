@@ -1,4 +1,4 @@
-
+@import url();
 /* --- ESTILOS GERAIS --- */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
 body { background-color: #fff; color: #333; display: flex; flex-direction: column; align-items: center; font-family: 'Montserrat', sans-serif; }
@@ -42,7 +42,7 @@ padding: 50px 40px; box-shadow: var(--card-shadow); border: 1px solid #f0f0f0; o
 
 /* --- NAVEGAÇÃO PRINCIPAL --- */
 .tabs-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 50px; }
-.tabs-wrapper { background: linear-gradient(270deg, #8CE1AF 0%, #90DFB1 0.01%, #F0B4E6 25.52%, #F0B4E6 25.53%, #F5EB64 51.59%, #645ACD 77.12%, #FF7D41 100.05%); border-radius: 50px; padding: 5px; display: flex; gap: 5px; flex-wrap: wrap; }
+.tabs-wrapper { background: linear-gradient(to left, #232823, #333938, #464b4c, #5c5d5f, #717171); border-radius: 50px; padding: 5px; display: flex; gap: 5px; flex-wrap: wrap; }
 .tab-btn {
     border: none;
     background: transparent;
@@ -484,4 +484,108 @@ padding: 50px 40px; box-shadow: var(--card-shadow); border: 1px solid #f0f0f0; o
     .main-menu {
         flex-wrap: wrap; /* Permite quebrar linha no mobile */
     }
+}
+
+/* --- DESIGN ESTILO STARTER (SEGMENTOS) --- */
+
+/* Grid Responsivo (Substitui o style inline) */
+.starter-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsivo */
+    gap: 25px;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/* O CARD */
+.starter-card-item {
+    position: relative; /* Essencial para elementos absolutos (ícone e faixa) */
+    background-color: #fff;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden; /* Garante que as pontas arredondadas cortem o conteúdo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 220px; /* Altura padrão */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Efeito Hover (Levanta um pouco) */
+.starter-card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* 1. FAIXA AMARELA INFERIOR */
+.starter-card-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px; /* Espessura da faixa */
+    background-color: #f5eb64; /* Amarelo Tecnofit */
+}
+
+/* 2. ÍCONE NO CANTO SUPERIOR DIREITO */
+.starter-icon-badge {
+    position: absolute;
+    top: 25px; /* Desce para alinhar com o título, não fica mais grudado no teto */
+    right: 0;  /* Grudado na lateral direita */
+    width: 70px; /* Mais largo para virar um retângulo */
+    height: 32px; /* Altura menor, estilo etiqueta */
+    background-color: #f5eb64; /* Amarelo Tecnofit */
+
+    /* O SEGREDO DO FORMATO: Arredonda só a esquerda */
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none; /* Remove a sombra para ficar flat igual ao print */
+}
+
+/* Ajuste do tamanho do ícone para caber na nova tarja */
+.starter-icon-badge i {
+    font-size: 14px; /* Ícone menor e mais delicado */
+    color: #222;
+    margin-left: 5px; /* Um pequeno ajuste visual */
+}
+
+/* Ajuste no padding do card para o texto não bater na tarja */
+.starter-card-body {
+    padding: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.starter-card-body h4 {
+    margin: 0 0 25px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #333;
+}
+
+/* BOTÃO ESCURO (PRETO) */
+.btn-starter-action {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-starter-action:hover {
+    background-color: #000;
+    transform: scale(1.05);
 }
