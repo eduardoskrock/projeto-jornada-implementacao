@@ -29,30 +29,30 @@
 <section id="content-implementacao" class="content-section active">
 
     <div id="view-segmentos">
-        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Selecione seu segmento</h3>
+        <h3 class="col-title" style="text-align: center; margin-top: 20px;">Selecione o segmento</h3>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto;">
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-calendar-days card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-calendar-days card-icon" style="color: var(--tecno-black)"></i>
                 <h4 style="margin: 15px 0;">Agenda Fixa</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('agenda_fixa')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-dumbbell card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-dumbbell card-icon" style="color: var(--tecno-black);"></i>
                 <h4 style="margin: 15px 0;">Gym</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('gym')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-medal card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-medal card-icon" style="color: var(--tecno-black);"></i>
                 <h4 style="margin: 15px 0;">Box</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('box')">SAIBA MAIS</button>
             </div>
 
             <div class="migration-card" style="height: auto; padding: 30px 20px;">
-                <i class="fa-solid fa-user-tag card-icon" style="color: #5d50c6;"></i>
+                <i class="fa-solid fa-user-tag card-icon" style="color: var(--tecno-black);"></i>
                 <h4 style="margin: 15px 0;">Starter</h4>
                 <button class="btn-saiba-mais" onclick="selectSegment('starter')">SAIBA MAIS</button>
             </div>
@@ -148,7 +148,7 @@
 </section>
 
 <section id="content-catraca" class="content-section">
-    <div style="background-color: #fcfeb3; padding: 30px; border-radius: 15px; margin-bottom: 40px;">
+    <div style="background-color: #ebebeb; padding: 30px; border-radius: 15px; margin-bottom: 40px;">
         <div style="margin-bottom: 20px;">
             <h3 style="color: #333; text-align: center;">Requisitos obrigatórios para integração de controle de acesso</h3>
         </div>

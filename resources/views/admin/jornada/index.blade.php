@@ -263,7 +263,7 @@
 
         <section id="content-catraca" class="content-section">
 
-            <div style="background-color: #fcfeb3; padding: 30px; border-radius: 15px; margin-bottom: 40px;">
+            <div style="background-color: #ebebeb; padding: 30px; border-radius: 15px; margin-bottom: 40px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="color: #333; margin: 0;">Requisitos obrigatórios para conectividade com o Tecnofit Catraca</h3>
                     <button onclick="abrirModal('modalNovoRequisito')" class="btn-saiba-mais" style="background: #fff; color: #333;">+ NOVO REQUISITO</button>

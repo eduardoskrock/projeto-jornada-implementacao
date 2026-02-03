@@ -8,10 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
+       if (!Schema::hasColumn('passo_implementacaos', 'segmentos')) {
         Schema::table('passo_implementacaos', function (Blueprint $table) {
-            // Armazenará um array, ex: ["gym", "box"]
-            $table->json('segmentos')->nullable()->after('tipo');
+            $table->text('segmentos')->nullable(); // ou o tipo que você definiu
         });
+    }
     }
 
     public function down()
