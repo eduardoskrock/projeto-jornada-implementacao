@@ -74,6 +74,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "8.4.0"
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
@@ -81,7 +84,9 @@
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
+
     },
+
     "minimum-stability": "dev",
     "prefer-stable": true
 }
