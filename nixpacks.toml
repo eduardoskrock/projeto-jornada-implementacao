@@ -1,0 +1,5 @@
+[variables]
+    PHP_EXTENSION_FFI = "1"
+
+[phases.setup]
+    nixPkgs = ["...", "php83Extensions.ffi"]
