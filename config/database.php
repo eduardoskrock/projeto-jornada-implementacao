@@ -113,6 +113,13 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'libsql' => [
+            'driver' => 'libsql',
+            'url' => env('DB_SYNC_URL'),
+            'authToken' => env('DB_AUTH_TOKEN'),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => '',
+        ],
     ],
 
     /*
